@@ -1,5 +1,4 @@
 module AgileZen
-  # AgileZen::Stories module.
   module Phases
 
     def project_phases(project_id, options={})

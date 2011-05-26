@@ -4,6 +4,7 @@ module AgileZen
     
     include Projects
     include Stories
+    include Phases
     
     attr_accessor :api_key
     
