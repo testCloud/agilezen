@@ -26,6 +26,33 @@ describe AgileZen::Stories do
         
         response1.items.should_not eql(response2.items)
       end
+
+      it "creates" do
+        
+        params = {
+          "text" => "Feed the children",
+          "size" => "large",
+          "color" => "grey",
+          "ready" => false,
+          "blocked" => true,
+          "reasonBlocked"=> "Need new ideas",
+          "phase"=> {
+            "name"=> "Backlog"
+          },
+          "creator"=> {
+            "name"=> "John Doe"
+          },
+          "owner"=> {
+            "name"=> "Jane Doe"
+          }
+        }
+
+        register_post('https://agilezen.com/api/v1/projects/15404/stories', params.to_json, 'story.json')
+        response = @client.create_project_story(15404, params)
+
+        response.text.should eq('Feed the children')
+        response.color.should eq('grey')
+      end
     end
     
     context "failure" do
