@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.description = s.summary
   
   s.add_development_dependency 'bundler', '~> 1.0'
+  s.add_development_dependency 'ruby-debug19', '~> 0.11.6'
   s.add_development_dependency 'rake', '~> 0.8'
   s.add_development_dependency 'rspec', '~> 2.5'
   s.add_development_dependency 'cucumber', '~> 0.10.0'

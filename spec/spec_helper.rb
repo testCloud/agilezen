@@ -1,9 +1,11 @@
-require "bundler"
-Bundler.setup
+require 'rubygems'
+require "bundler/setup"
 
+require 'ruby-debug'
 require "rspec"
 require 'fakeweb'
 require "agilezen"
+
 # require "support/matchers"
 # 
 # Rspec.configure do |config|
