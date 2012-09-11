@@ -31,7 +31,18 @@ module AgileZen
         builder.use Faraday::Response::Mashify
       end
     end
-    
+
+    # Builds and returns the Faraday::Connection based on set options.
+    def multipart_connection
+      @multipart_connection ||= Faraday::Connection.new(:url => connection_url, :headers => multipart_connection_headers) do |builder|
+        builder.use Faraday::Response::ParseJson
+        builder.use Faraday::Response::Mashify
+        builder.request :multipart
+        builder.request :url_encoded
+        builder.adapter :net_http
+      end
+    end
+
     # Helper method for determining the correct URL.
     def connection_url
       'https://agilezen.com'
@@ -42,6 +53,14 @@ module AgileZen
       headers = {
         :accept => 'application/json',
         'X-Zen-ApiKey' => @api_key
+      }
+    end
+
+    def multipart_connection_headers
+      multipart_headers = {
+        :accept => 'application/json',
+        'X-Zen-ApiKey' => @api_key,
+        'Transfer-Encoding' => 'chunked'
       }
     end
   end

@@ -19,6 +19,17 @@ module AgileZen
       
     end
 
+    def upload_story_attachment(project_id, story_id, file, options={})
+      response_body = nil
+      begin
+        response = multipart_connection.post "/api/v1/projects/#{project_id}/stories/#{story_id}/attachments", { :file => file }
+        response_body = response.body
+      rescue MultiJson::DecodeError => e
+        #p 'Unable to parse JSON.'
+      end
+      response_body
+    end
+
     # Retrieve information for all stories of a given project.
     def project_stories(project_id, options={})
       response_body = nil
